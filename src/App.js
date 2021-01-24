@@ -42,23 +42,32 @@ const options = [
   },
 ];
 
+const showDropdown = (select,setSelect) => {
+  if (window.location.pathname === '/dropdown') {
+   
+  
+    const label = "Seleccione un Color"
+    return <Dropdown
+      option={options}
+      dropName={label}
+      select={select}
+      onChangeSelect={setSelect}
+    />
+  }
+}
+const showTranslate = () => {
+  if (window.location.pathname === "/translate") {
+    return <Translate />
+  }
+}
+
 export default () => {
   const [select, setSelect] = useState(options[0]);
-  const [showDropdown, setShowDropdown] = useState(true);
-  const label = "Seleccione un Color"
   return (
-    <div>
-      <button onClick={() => { setShowDropdown(!showDropdown) }}>Toggle Dropdown</button>
-      {showDropdown ?
-        <Dropdown
-          option={options}
-          dropName={label}
-          select={select}
-          onChangeSelect={setSelect}
-        />
-        : null}
-      <br />
-      <Translate />
+    <div className="ui form">
+      {showDropdown(select,setSelect)}
+      {showTranslate()}
+
     </div>
   )
 };
