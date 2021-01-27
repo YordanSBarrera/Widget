@@ -3,7 +3,8 @@ import Accordion from './componentes/accordion'
 import Search from './componentes/search'
 import Dropdown from './componentes/dropdown'
 import Translate from './componentes/tranlate'
-
+import Route from './componentes/route'
+import Header from './componentes/header'
 const items = [
   {
     title: 'What is React',
@@ -42,31 +43,37 @@ const options = [
   },
 ];
 
-const showDropdown = (select,setSelect) => {
-  if (window.location.pathname === '/dropdown') {
-   
-  
-    const label = "Seleccione un Color"
-    return <Dropdown
-      option={options}
-      dropName={label}
-      select={select}
-      onChangeSelect={setSelect}
-    />
-  }
-}
-const showTranslate = () => {
-  if (window.location.pathname === "/translate") {
-    return <Translate />
-  }
-}
+
 
 export default () => {
   const [select, setSelect] = useState(options[0]);
+  const label = "Seleccione un Color"
   return (
     <div className="ui form">
-      {showDropdown(select,setSelect)}
-      {showTranslate()}
+      <Header />
+
+      <Route path="/list">
+        <Search />
+      </Route>
+
+      <Route path="/">
+        <Accordion items={items}/>
+      </Route>
+
+      <Route path="/translate">
+        <Translate />
+      </Route>
+
+      <Route path="/dropdown">
+        <Dropdown
+          option={options}
+          dropName={label}
+          select={select}
+          onChangeSelect={setSelect}
+        />
+      </Route>
+
+
 
     </div>
   )
